@@ -1,0 +1,268 @@
+// Color Palette
+$primary-color: #4caf50;
+$secondary-color: #f1f1f1;
+$button-color: #007bff;
+$button-hover-color: #0056b3;
+$error-color: #dc3545;
+$success-color: #28a745;
+$text-color: #333;
+$background-color: #f4f7fa;
+$banner-bg-color: #f8f8f8;
+$banner-border-color: #ddd;
+$banner-padding: 15px;
+$banner-height: 100px;
+$popup-overlay-bg: rgba(0, 0, 0, 0.6);
+$popup-close-btn-bg: #ff4747;
+
+// Global font-family
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: $background-color;
+    color: $text-color;
+}
+
+// Container styling for the HomePage
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+// Header styling for HomePage
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+// Instructions text styling
+.text-center {
+    color: $text-color;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.list-decimal {
+    margin-left: 20px;
+    list-style-type: decimal;
+}
+
+// Turnstile container (verifikasi CAPTCHA)
+.turnstile-container {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+// Button styling
+.bg-blue-500 {
+    background-color: $button-color;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    max-width: 250px;
+    width: 100%;
+    margin-top: 20px;
+
+    &:hover {
+        background-color: $button-hover-color;
+        transform: scale(1.05);
+    }
+}
+
+// Button Text for progress (below button)
+.mt-2 {
+    margin-top: 10px;
+}
+
+.text-sm {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.text-gray-500 {
+    color: #6b6b6b;
+}
+
+// Loading state message
+.loading-message {
+    font-size: 1.2rem;
+    color: $primary-color;
+    font-weight: bold;
+    text-align: center;
+}
+
+// Error & Success Messages
+.error-message,
+.success-message {
+    background-color: $error-color;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.success-message {
+    background-color: $success-color;
+}
+
+// Banner Iklan Styling
+.top-banner,
+.middle-banner,
+.bottom-banner {
+    width: 100%;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.banner-content {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+// Popup Overlay - Clean and Transparent
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $popup-overlay-bg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+// Popup Container - Card Style
+.popup-container {
+    position: relative;
+    width: 80%;
+    max-width: 750px;
+    border-radius: 15px;
+    padding: 20px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease-out;
+}
+
+.popup-container.open {
+    transform: scale(1.05); /* Slight zoom effect on popup open */
+}
+
+// Close Button Styling
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: $popup-close-btn-bg;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #ff0000; /* Darker red on hover */
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+// Video Container - Maintaining Aspect Ratio
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    margin-top: 20px;
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+// Tap anywhere to close message
+.close-message {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.close-message:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+// Responsive Design for smaller screens
+@media (max-width: 768px) {
+    .popup-container {
+        width: 90%;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .close-btn {
+        top: 10px;
+        right: 10px;
+        font-size: 1.3rem;
+        padding: 8px;
+    }
+
+    .top-banner,
+    .middle-banner,
+    .bottom-banner {
+        height: 80px;
+        padding: 10px;
+    }
+
+    .banner-content {
+        font-size: 1rem;
+    }
+}

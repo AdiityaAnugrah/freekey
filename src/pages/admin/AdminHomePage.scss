@@ -1,0 +1,170 @@
+// Palet warna dan tema
+$primary-color: #4caf50;
+$secondary-color: #f1f1f1;
+$button-color: #007bff;
+$button-hover-color: #0056b3;
+$error-color: #dc3545;
+$success-color: #28a745;
+$text-color: #333;
+$background-color: #f4f7fa;
+$banner-bg-color: #f8f8f8;
+$banner-border-color: #ddd;
+$banner-padding: 15px;
+$banner-height: 100px;
+$popup-overlay-bg: rgba(0, 0, 0, 0.6);
+$popup-close-btn-bg: #ff4747;
+
+// Reset default styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: $background-color;
+    color: $text-color;
+}
+
+// Admin page container
+.admin-container {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: $secondary-color;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+// Title Section
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 20px;
+}
+
+// File input and form styles
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid $banner-border-color;
+    background-color: $secondary-color;
+    font-size: 1.1rem;
+    color: $text-color;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+        border-color: $primary-color;
+        outline: none;
+    }
+}
+
+select {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid $banner-border-color;
+    background-color: $secondary-color;
+    font-size: 1.1rem;
+    color: $text-color;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+        border-color: $primary-color;
+        outline: none;
+    }
+}
+
+// Submit Button Styles
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: $button-color;
+    color: $secondary-color;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: $button-hover-color;
+        transform: translateY(-2px); /* Animasi hover */
+    }
+
+    &:active {
+        background-color: $button-hover-color;
+    }
+}
+
+// File Preview Styles
+.file-preview {
+    background-color: $secondary-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+    h3 {
+        font-size: 1.3rem;
+        color: $primary-color;
+        margin-bottom: 10px;
+    }
+
+    pre {
+        font-size: 1rem;
+        color: $text-color;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #fafafa;
+        padding: 15px;
+        border-radius: 6px;
+    }
+}
+
+// SweetAlert Custom Styles
+.swal-btn-confirm {
+    background-color: $button-color;
+    border-radius: 5px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    color: $secondary-color;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $button-hover-color;
+    }
+}
+
+// Responsive Design for Mobile
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    input[type="file"],
+    select,
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .file-preview {
+        padding: 15px;
+    }
+}
