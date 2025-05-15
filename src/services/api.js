@@ -156,6 +156,69 @@ const uploadKeys = async (file, durasi) => {
     });
 };
 
+const getKeyOne = async () => {
+    try {
+        const response = await fetch(`${API_URL}/key/create-key`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const responseJson = await response.json();
+        if (response.status != 200) {
+            return {
+                status: response.status,
+                message: responseJson.message,
+            };
+        }
+        return {
+            status: response.status,
+            data: responseJson,
+        };
+    } catch (error) {
+        console.error(error);
+        console.error(`Error get kye one`);
+    }
+};
+
+const tokenAdsCreate = async () => {
+    try {
+        const response = await fetch(`${API_URL}/token`, {
+            method: "POST",
+        });
+        if (response.status === 200) {
+            const data = await response.json();
+            return {
+                status: response.status,
+                data,
+            };
+        } else {
+            return {
+                status: response.status,
+                message: response.statusText,
+            };
+        }
+    } catch (error) {
+        console.error(`Error Create Token Ads`);
+        throw error;
+    }
+};
+const tokenAdsVerify = async (token) => {
+    try {
+        const response = await fetch(`${API_URL}/token`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token }),
+        });
+        return response.status;
+    } catch (error) {
+        console.error(`Error verify token ads`);
+        throw error;
+    }
+};
+
 export {
     getAllKeys,
     createKey,
@@ -163,4 +226,7 @@ export {
     getKeyById,
     verifyCaptcha,
     uploadKeys,
+    tokenAdsCreate,
+    tokenAdsVerify,
+    getKeyOne,
 };

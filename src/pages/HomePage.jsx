@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Turnstile from "react-turnstile"; // Import Turnstile
 import "./HomePage.scss";
+import { tokenAdsCreate } from "../services/api";
 
 const HomePage = () => {
     const [isVerified, setIsVerified] = useState(false);
@@ -15,15 +16,21 @@ const HomePage = () => {
     const navigate = useNavigate();
     const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
-    const goToAdPlayer = () => {
+    const goToAdPlayer = async () => {
         console.log(isVerified);
+        const hasilFetchToken = await tokenAdsCreate();
+        console.log(hasilFetchToken);
+        localStorage.setItem("isVerified", hasilFetchToken.data.token);
+        const expired = Date.now() + 2 * 60 * 1000;
+        localStorage.setItem("expired", expired);
         navigate("/adplayer");
     };
     const openAffiliateTabs = () => {
         const affiliateLinks = [
-            "https://affiliate-link-1.com",
-            "https://affiliate-link-2.com",
-            "https://affiliate-link-3.com",
+            "https://s.shopee.co.id/4q36JRFwsj",
+            "https://s.shopee.co.id/6poAhCt7mW",
+            "https://s.shopee.co.id/707atUNgR8",
+            "https://www.profitableratecpm.com/um8zi4qf?key=ae4f83193cbfb411edc4cc1c08f1c48d",
         ];
 
         if (clickCount < 3) {
@@ -39,7 +46,7 @@ const HomePage = () => {
             setIsLoading(true); // Start loading after 3 clicks
             setTimeout(() => {
                 Swal.fire({
-                    title: "Apakah Anda berusia 18 tahun atau lebih?",
+                    title: "Apakah Anda berusia 18+ tahun atau lebih?",
                     showCancelButton: true,
                     confirmButtonText: "Ya",
                     cancelButtonText: "Tidak",
@@ -83,10 +90,8 @@ const HomePage = () => {
 
     return (
         <div className="container mx-auto p-6 space-y-6">
-            {/* Show Loading message if still loading */}
             {loading && <div className="loading-message">Loading...</div>}
 
-            {/* Top Banner with Adsterra */}
             <div className="top-banner">
                 <div className="banner-content"></div>
             </div>
@@ -110,51 +115,45 @@ const HomePage = () => {
                 <div className="flex justify-center mb-6">
                     <Turnstile
                         sitekey={siteKey}
-                        onVerify={(token) => {
-                            fetch(
-                                `${
-                                    import.meta.env.VITE_URL_BACKEND
-                                }/key/verifikasi-captcha`,
-                                {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({ token }),
-                                }
-                            )
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    if (
-                                        data.message === "Verifikasi berhasil!"
-                                    ) {
-                                        setIsVerified(true);
-                                        setShowButton(true);
-                                        setShowVerification(false);
-                                        localStorage.setItem(
-                                            "isVerified",
-                                            "true"
-                                        );
-                                    } else {
-                                        Swal.fire({
-                                            icon: "error",
-                                            title: "Verifikasi Gagal",
-                                            text: "Coba lagi.",
-                                        });
-                                        setShowButton(false);
+                        onVerify={async (token) => {
+                            try {
+                                const response = await fetch(
+                                    `${
+                                        import.meta.env.VITE_URL_BACKEND
+                                    }/key/verifikasi-captcha`,
+                                    {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify({ token }),
                                     }
-                                })
-                                .catch((error) => {
-                                    console.error(
-                                        "Verifikasi CAPTCHA gagal:",
-                                        error
-                                    );
+                                );
+                                // const responseJson = await response.json();
+                                if (response.status == 200) {
+                                    setIsVerified(true);
+                                    setShowButton(true);
+                                    setShowVerification(false);
+                                    // localStorage.setItem("isVerified", "true");
+                                } else {
                                     Swal.fire({
                                         icon: "error",
-                                        title: "Terjadi Kesalahan",
-                                        text: "Silakan coba lagi.",
+                                        title: "Verifikasi Gagal",
+                                        text: "Coba lagi.",
                                     });
+                                    setShowButton(false);
+                                }
+                            } catch (error) {
+                                console.error(
+                                    "Verifikasi CAPTCHA gagal:",
+                                    error
+                                );
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Terjadi Kesalahan",
+                                    text: "Silakan coba lagi.",
                                 });
+                            }
                         }}
                     />
                 </div>
@@ -198,7 +197,7 @@ const HomePage = () => {
                             X
                         </button>
                         <div className="video-container">
-                            <iframe
+                            {/* <iframe
                                 width="560"
                                 height="315"
                                 src="https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -206,7 +205,7 @@ const HomePage = () => {
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
-                            ></iframe>
+                            ></iframe> */}
                         </div>
                         <div className="close-message" onClick={closePopup}>
                             Tap di mana saja untuk menutup video
